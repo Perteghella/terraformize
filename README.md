@@ -2,9 +2,9 @@
 
 Apply\Destory Terraform modules via a simple REST API endpoint.
 
-Github actions CI unit tests & auto dockerhub push status: [![CI/CD](https://github.com/naorlivne/terraformize/actions/workflows/full_ci_cd_workflow.yml/badge.svg)](https://github.com/naorlivne/terraformize/actions/workflows/full_ci_cd_workflow.yml)
+Github actions CI unit tests & auto dockerhub push status: [![CI/CD](https://github.com/Perteghella/terraformize/actions/workflows/full_ci_cd_workflow.yml/badge.svg)](https://github.com/Perteghella/terraformize/actions/workflows/full_ci_cd_workflow.yml)
 
-Code coverage: [![codecov](https://codecov.io/gh/naorlivne/terraformize/branch/master/graph/badge.svg)](https://codecov.io/gh/naorlivne/terraformize)
+Code coverage: [![codecov](https://codecov.io/gh/Perteghella/terraformize/branch/master/graph/badge.svg)](https://codecov.io/gh/Perteghella/terraformize)
 
 # Features
 
@@ -218,10 +218,17 @@ It's up to you to ensure the `uuid` you pass is indeed unique.
     ```
 
 
-# Build the docker image locally
+# Build the docker image manually
 
-Based on the architecture you have use the proper Dockerfile
+Based on the architecture you have use the proper Dockerfile to build
 
 ```
-docker build -f Dockerfile-arm64 -t perteghella/terraformize:1.4.3 .
+docker build  -f Dockerfile-arm64 -t perteghella/terraformize:1.0.2 -t perteghella/terraformize:latest . 
+```
+
+Build and push multi arch image to docker hub
+
+```
+docker buildx build --platform linux/amd64 -f Dockerfile -t perteghella/terraformize:1.0.2 -t perteghella/terraformize:latest --push . 
+docker buildx build --platform linux/arm64 -f Dockerfile-arm64 -t perteghella/terraformize:1.0.2 -t perteghella/terraformize:latest --push . 
 ```

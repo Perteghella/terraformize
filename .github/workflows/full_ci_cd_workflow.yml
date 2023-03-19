@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.9", "3.10", "3.11" ]
+        python-version: [ "3.10", "3.11" ]
     services:
       consul:
         image: consul
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install dependencies
         run: |
-          wget https://releases.hashicorp.com/terraform/1.2.5/terraform_1.2.5_linux_amd64.zip -O /tmp/terraform_1.2.5_linux_amd64.zip
+          wget https://releases.hashicorp.com/terraform/1.4.2/terraform_1.4.2_linux_amd64.zip -O /tmp/terraform_1.4.2_linux_amd64.zip
           unzip /tmp/terraform_*.zip
           cp terraform /usr/bin/terraform
           python -m pip install --upgrade pip
@@ -61,7 +61,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: naorlivne/${{ github.event.repository.name }}:latest
+          tags: perteghella/${{ github.event.repository.name }}:latest
 
   build_and_publish_job_version:
 
@@ -85,4 +85,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: naorlivne/${{ github.event.repository.name }}:v${{ github.run_number }}
+          tags: perteghella/${{ github.event.repository.name }}:v${{ github.run_number }}
