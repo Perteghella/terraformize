@@ -189,3 +189,6 @@ venv/**
 **/.terraform/*
 **/terraform.tfstate.d/*
 .terraform/
+
+# Mac/OSX
+.DS_Store
