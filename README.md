@@ -12,6 +12,7 @@ Code coverage: [![codecov](https://codecov.io/gh/naorlivne/terraformize/branch/m
     * `terraform apply`
     * `terraform destroy`
     * `terraform plan`
+    * `terraform output`
 * No code changes needed, supports 100% of all terraform modules unmodified
 * Built in support for multiple terraform workspaces
 * Can pass variables to the terraform run via the request body (passed as a -var arg to the `terraform apply` or `terraform destroy` command)
@@ -45,7 +46,7 @@ Code coverage: [![codecov](https://codecov.io/gh/naorlivne/terraformize/branch/m
 Running Terraformize is as simple as running a docker container
 
 ```docker
-docker run -d -p 80:80 -v /path/to/my/terraform/module/dir:/www/terraform_modules/ naorlivne/terraformize
+docker run -d -p 80:80 -v /path/to/my/terraform/module/dir:/www/terraform_modules/ perteghella/terraformize
 ```
 
 Feel free to skip to the end of the document for a working example that will explain how to use Terraformize
@@ -215,3 +216,12 @@ It's up to you to ensure the `uuid` you pass is indeed unique.
         "test_var": "hello-world"
     }'
     ```
+
+
+# Build the docker image locally
+
+Based on the architecture you have use the proper Dockerfile
+
+```
+docker build -f Dockerfile-arm64 -t perteghella/terraformize:1.4.3 .
+```
