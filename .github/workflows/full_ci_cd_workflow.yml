@@ -55,13 +55,22 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - name: Build and push ARM64
         uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           push: true
-          tags: perteghella/${{ github.event.repository.name }}:latest
+          file: Dockerfile-arm64
+          tags: perteghella/${{ github.event.repository.name }}:latest-arm64
+      - name: Build and push AMD64
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          file: Dockerfile-amd64
+          tags: perteghella/${{ github.event.repository.name }}:latest-amd64
 
   build_and_publish_job_version:
 
@@ -79,10 +88,19 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - name: Build and push ARM64
         uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           push: true
-          tags: perteghella/${{ github.event.repository.name }}:v${{ github.run_number }}
+          file: Dockerfile-amd64
+          tags: perteghella/${{ github.event.repository.name }}:v${{ github.run_number }}-arm64
+      - name: Build and push AMD64
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          file: Dockerfile-amd64
+          tags: perteghella/${{ github.event.repository.name }}:v${{ github.run_number }}-amd64
