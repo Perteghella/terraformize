@@ -231,4 +231,7 @@ Build and push multi arch image to docker hub
 ```
 docker buildx build --platform linux/amd64 -f Dockerfile-amd64 -t perteghella/terraformize:1.0.2-amd64 -t perteghella/terraformize:latest-amd64 --push . 
 docker buildx build --platform linux/arm64 -f Dockerfile-arm64 -t perteghella/terraformize:1.0.2-arm64 -t perteghella/terraformize:latest-arm64 --push . 
+
+docker buildx build --platform linux/amd64 -f Dockerfile-arm64 -t registry.gitlab.com/perteghella/terraformize:1.0.2-amd64 -t perteghella/terraformize:latest-amd64 --push .
+docker buildx build --platform linux/arm64 -f Dockerfile-arm64 -t registry.gitlab.com/perteghella/terraformize:1.0.2-arm64 -t perteghella/terraformize:latest-arm64 --push .
 ```
