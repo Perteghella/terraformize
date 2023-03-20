@@ -1,7 +1,8 @@
 name: push CI CD
 
 on:
-  push:
+  release:
+    types: [published]
     branches: [ "master" ]
 
 jobs:
