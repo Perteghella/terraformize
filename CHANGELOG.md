@@ -14,6 +14,12 @@ Types of changes
 - Fixed - for any bug fixes.
 - Security - in case of vulnerabilities.
 
+## [1.1.0] - 2023-04-21
+
+### Changed
+
+- Single Dockerfile for multi-architecture
+- Update to terraform 1.4.5
 
 ## [1.0.0] - 2023-03-19
 

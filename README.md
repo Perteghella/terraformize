@@ -220,18 +220,9 @@ It's up to you to ensure the `uuid` you pass is indeed unique.
 
 # Build the docker image manually
 
-Based on the architecture you have use the proper Dockerfile to build
+Build and push to docker hub a multi arch image
 
 ```
-docker build  -f Dockerfile-arm64 -t perteghella/terraformize:1.0.2 -t perteghella/terraformize:latest . 
-```
-
-Build and push multi arch image to docker hub
-
-```
-docker buildx build --platform linux/amd64 -f Dockerfile-amd64 -t perteghella/terraformize:1.0.2-amd64 -t perteghella/terraformize:latest-amd64 --push . 
-docker buildx build --platform linux/arm64 -f Dockerfile-arm64 -t perteghella/terraformize:1.0.2-arm64 -t perteghella/terraformize:latest-arm64 --push . 
-
-docker buildx build --platform linux/amd64 -f Dockerfile-arm64 -t registry.gitlab.com/perteghella/terraformize:1.0.2-amd64 -t perteghella/terraformize:latest-amd64 --push .
-docker buildx build --platform linux/arm64 -f Dockerfile-arm64 -t registry.gitlab.com/perteghella/terraformize:1.0.2-arm64 -t perteghella/terraformize:latest-arm64 --push .
+docker buildx build  --platform linux/amd64,linux/arm64 -f Dockerfile -t perteghella/terraformize:1.1.0 -t perteghella/terraformize:latest . --push
+docker buildx build  --platform linux/amd64,linux/arm64 -f Dockerfile -t registry.gitlab.com/perteghella/terraformize:1.1.0 -t registry.gitlab.com/perteghella/terraformize:latest . --push
 ```

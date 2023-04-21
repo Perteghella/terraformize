@@ -1,12 +1,10 @@
-# first need to get the terrafrom binary and extract it
-FROM python:3.11.2-alpine3.17 AS terraform_installer
-ADD https://releases.hashicorp.com/terraform/1.4.5/terraform_1.4.5_linux_arm64.zip /tmp/
-RUN unzip /tmp/terraform_*.zip -d /tmp
+# pull upstream terraform image
+FROM hashicorp/terraform:1.4.5 AS terraform
 
 # it's offical so i'm using it + alpine so damn small
-FROM python:3.11.2-alpine3.17
+FROM python:3.11.3-alpine3.17
 
-#exposing the port
+# exposing the port
 EXPOSE 80
 
 # set python to be unbuffered
@@ -18,15 +16,14 @@ ENV TF_IN_AUTOMATION=true
 # install required packages
 RUN apk add --no-cache libffi-dev
 
-# copy terraform binary and make it executable
-COPY --from=terraform_installer /tmp/terraform /usr/local/bin/terraform
-RUN chmod +x /usr/local/bin/terraform
+# copy terraform binary
+COPY --from=terraform /bin/terraform /usr/local/bin/terraform
 
 # adding the gunicorn config
 COPY config/config.py /etc/gunicorn/config.py
 
 COPY requirements.txt /www/requirements.txt
-RUN pip install -r /www/requirements.txt
+RUN pip install --no-cache-dir -r /www/requirements.txt
 
 # copy the codebase
 COPY . /www
