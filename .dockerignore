@@ -1,2 +1,10 @@
 **/.git
 .DS_Store
+.github/
+CHANGELOG.md                      
+LICENSE                         
+CODE_OF_CONDUCT.md              
+README.md                       
+CONTRIBUTING                    
+_workspace.code-workspace       
+CONTRIBUTORS.md
